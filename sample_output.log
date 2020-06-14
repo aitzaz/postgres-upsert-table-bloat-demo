@@ -1,0 +1,1181 @@
+... /blogs/postgres-upsert-issue-demo/table_bloat_demo.py
+2020-06-13 00:51.54 RUN No :::::: 1
+2020-06-13 00:51.55 Table created
+2020-06-13 00:51.55 Starting dummy data insertion
+2020-06-13 00:51.55
+    INSERT INTO public.raw_events (
+        source_id,
+        source_event_id,
+        event_logs
+    )
+    SELECT
+        mod(row_ids.i, 5) + 1,
+        row_ids.i,
+        'American whole magazine truth stop whose. On traditional measure example sense peace. Would mouth relate own chair.
+Together range line beyond. First policy daughter need kind miss.
+Trouble behavior style report size personal partner. During foot that course nothing draw.
+Language ball floor meet usually board necessary. Natural sport music white.
+Onto knowledge other his offer face country. Almost wonder employee attorney. Theory type successful together. Raise study modern miss dog Democrat quickly.
+Every manage political record word group food break. Picture suddenly drug rule bring determine some forward. Beyond chair recently and.
+Own available buy country store build before. Already against which continue. Look road article quickly.
+Per structure attorney author feeling job. Mean always beyond write. Employee toward like total now.
+Small citizen class morning. Others kind company likely.
+Themselves true power home price check real. Score from animal exactly drive well good. Pull opportunity throughout take car.
+Security stock ball organization recognize civil. Pm her then nothing increase.
+Industry product another knowledge else citizen month. Traditional page a although for study anyone. Could yourself plan base rise would.
+First degree response able state more. Couple part cup few. Beyond take however ball.
+Son break either president stage population boy. Everything affect American race.
+Water voice travel among see red. Republican total policy head Mrs debate onto. Catch even front.
+Full per among clearly. Face house nature fall long dream answer conference. Rock few structure federal board night loss.
+Buy break marriage also friend reach. Turn phone heart window. Assume be seek article.
+Hour million large major.
+Institution happy write end since. Court boy state table agree moment. Budget huge debate among way. Perhaps bit learn gun still.
+Work chance image quite there many true follow. Your play themselves myself use act relationship.' as event_logs_str
+    FROM generate_series(1, 2500000) row_ids(i)
+    ON CONFLICT (source_id, source_event_id)
+    DO NOTHING;
+
+2020-06-13 00:51.55 Starting insertion...
+2020-06-13 00:53.17 0 rows generated in events table
+2020-06-13 00:53.17 raw_events table size: ('17 GB',)
+2020-06-13 00:53.17 raw_events table stats:
+2020-06-13 00:53.17 relid                    : 16194813
+2020-06-13 00:53.17 schemaname               : public
+2020-06-13 00:53.17 relname                  : raw_events
+2020-06-13 00:53.17 seq_scan                 : 9
+2020-06-13 00:53.17 seq_tup_read             : 15000000
+2020-06-13 00:53.17 idx_scan                 : 10000033
+2020-06-13 00:53.17 idx_tup_fetch            : 23043168
+2020-06-13 00:53.17 n_tup_ins                : 2500004
+2020-06-13 00:53.17 n_tup_upd                : 10500000
+2020-06-13 00:53.17 n_tup_del                : 0
+2020-06-13 00:53.17 n_tup_hot_upd            : 443739
+2020-06-13 00:53.17 n_live_tup               : 2735963
+2020-06-13 00:53.17 n_dead_tup               : 9608773
+2020-06-13 00:53.17 n_mod_since_analyze      : 9000000
+2020-06-13 00:53.17 last_vacuum              : None
+2020-06-13 00:53.17 last_autovacuum          : None
+2020-06-13 00:53.17 last_analyze             : None
+2020-06-13 00:53.17 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 00:53.17 vacuum_count             : 0
+2020-06-13 00:53.17 autovacuum_count         : 0
+2020-06-13 00:53.17 analyze_count            : 0
+2020-06-13 00:53.17 autoanalyze_count        : 2
+2020-06-13 00:53.17 Function "generate_dummy_data" took 81.156654861 seconds to complete.
+2020-06-13 00:53.17 Starting to update data
+2020-06-13 00:54.22 Update 500000 rows for source_id: 4
+2020-06-13 00:55.00 Update 500000 rows for source_id: 5
+2020-06-13 00:55.43 Update 500000 rows for source_id: 1
+2020-06-13 00:56.25 Update 500000 rows for source_id: 2
+2020-06-13 00:57.13 Update 500000 rows for source_id: 3
+2020-06-13 00:57.13 All rows in events table are updated
+2020-06-13 00:57.13 raw_events table size: ('19 GB',)
+2020-06-13 00:57.13 raw_events table stats:
+2020-06-13 00:57.13 relid                    : 16194813
+2020-06-13 00:57.13 schemaname               : public
+2020-06-13 00:57.13 relname                  : raw_events
+2020-06-13 00:57.13 seq_scan                 : 10
+2020-06-13 00:57.13 seq_tup_read             : 17500000
+2020-06-13 00:57.13 idx_scan                 : 10000038
+2020-06-13 00:57.13 idx_tup_fetch            : 25678325
+2020-06-13 00:57.13 n_tup_ins                : 2500004
+2020-06-13 00:57.13 n_tup_upd                : 13000000
+2020-06-13 00:57.13 n_tup_del                : 0
+2020-06-13 00:57.13 n_tup_hot_upd            : 534864
+2020-06-13 00:57.13 n_live_tup               : 2735963
+2020-06-13 00:57.13 n_dead_tup               : 12093609
+2020-06-13 00:57.13 n_mod_since_analyze      : 11500000
+2020-06-13 00:57.13 last_vacuum              : None
+2020-06-13 00:57.13 last_autovacuum          : None
+2020-06-13 00:57.13 last_analyze             : None
+2020-06-13 00:57.13 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 00:57.13 vacuum_count             : 0
+2020-06-13 00:57.13 autovacuum_count         : 0
+2020-06-13 00:57.13 analyze_count            : 0
+2020-06-13 00:57.13 autoanalyze_count        : 2
+2020-06-13 00:57.13 Function "update_data" took 236.272664803 seconds to complete.
+2020-06-13 00:57.13 Starting soft-deletion
+2020-06-13 00:57.45 0 rows soft deleted for source_id: 4
+2020-06-13 00:57.47 0 rows soft deleted for source_id: 5
+2020-06-13 00:57.48 0 rows soft deleted for source_id: 1
+2020-06-13 00:57.50 0 rows soft deleted for source_id: 2
+2020-06-13 00:57.52 0 rows soft deleted for source_id: 3
+2020-06-13 00:57.52 Total soft deleted rows: 0
+2020-06-13 00:57.52 raw_events table size: ('19 GB',)
+2020-06-13 00:57.52 raw_events table stats:
+2020-06-13 00:57.52 relid                    : 16194813
+2020-06-13 00:57.52 schemaname               : public
+2020-06-13 00:57.52 relname                  : raw_events
+2020-06-13 00:57.52 seq_scan                 : 11
+2020-06-13 00:57.52 seq_tup_read             : 20000000
+2020-06-13 00:57.52 idx_scan                 : 10000043
+2020-06-13 00:57.52 idx_tup_fetch            : 28327963
+2020-06-13 00:57.52 n_tup_ins                : 2500004
+2020-06-13 00:57.52 n_tup_upd                : 13000000
+2020-06-13 00:57.52 n_tup_del                : 0
+2020-06-13 00:57.52 n_tup_hot_upd            : 534864
+2020-06-13 00:57.52 n_live_tup               : 2735963
+2020-06-13 00:57.52 n_dead_tup               : 12093593
+2020-06-13 00:57.52 n_mod_since_analyze      : 11500000
+2020-06-13 00:57.52 last_vacuum              : None
+2020-06-13 00:57.52 last_autovacuum          : None
+2020-06-13 00:57.52 last_analyze             : None
+2020-06-13 00:57.52 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 00:57.52 vacuum_count             : 0
+2020-06-13 00:57.52 autovacuum_count         : 0
+2020-06-13 00:57.52 analyze_count            : 0
+2020-06-13 00:57.52 autoanalyze_count        : 2
+2020-06-13 00:57.52 Function "soft_delete_rows" took 39.614448847000006 seconds to complete.
+2020-06-13 00:57.52 All done!
+2020-06-13 00:57.52 Sleeping for 120 seconds after RUN No: 1
+2020-06-13 00:59.53 RUN No :::::: 2
+2020-06-13 00:59.54 Table created
+2020-06-13 00:59.54 Starting dummy data insertion
+2020-06-13 00:59.54
+    INSERT INTO public.raw_events (
+        source_id,
+        source_event_id,
+        event_logs
+    )
+    SELECT
+        mod(row_ids.i, 5) + 1,
+        row_ids.i,
+        'Painting child reflect up control instead company. Future model green place beat sense far.
+Left despite boy without feeling participant interest seem. Question set discussion seven. Place again establish protect a.
+Three report know second government the pull. Other along society figure future. Teacher three seven attention team executive care.
+Decision black western myself scientist tough everything kind. Pick church recent high opportunity cause property. Place score design major maybe manage.
+Feel seat appear perform agent likely. Suffer without rather.
+According American per yourself their record. Cell of course its respond.
+Former possible reach challenge. Model can travel know. Interview man role somebody keep daughter.
+Almost plan that hair sea quality.
+Father beautiful than seem sign third in approach. Program possible natural same issue lawyer effort.
+Front amount apply glass face. Cell skill quite. However TV law fund bill third some follow.
+Eight miss couple bag thank generation. Economy rock feeling might his. Gas Republican and various authority leave right.
+Without leave brother bank better she.
+Key baby interview senior stop. Where economic detail. Various floor itself news experience.
+Represent since method left plant. Discussion budget situation between run. Design they young according movement.
+Business population brother. Grow push region produce develop story drive. Film force health lose old case administration.
+Happen play speech theory choice computer. Career deal trip market. Dog car do his part.
+Material truth pattern ago other majority final when. Present produce manager well lose finish summer.
+Page region start size. Want decade firm section economic television.
+General class admit of around. Character against physical agency and difficult president at.
+Will institution throughout describe itself group. Power road size impact.
+Through move source wonder relate service.' as event_logs_str
+    FROM generate_series(1, 2500000) row_ids(i)
+    ON CONFLICT (source_id, source_event_id)
+    DO NOTHING;
+
+2020-06-13 00:59.54 Starting insertion...
+2020-06-13 01:00.44 0 rows generated in events table
+2020-06-13 01:00.44 raw_events table size: ('19 GB',)
+2020-06-13 01:00.44 raw_events table stats:
+2020-06-13 01:00.44 relid                    : 16194813
+2020-06-13 01:00.44 schemaname               : public
+2020-06-13 01:00.44 relname                  : raw_events
+2020-06-13 01:00.44 seq_scan                 : 11
+2020-06-13 01:00.44 seq_tup_read             : 20000000
+2020-06-13 01:00.44 idx_scan                 : 12500043
+2020-06-13 01:00.44 idx_tup_fetch            : 30827963
+2020-06-13 01:00.44 n_tup_ins                : 2500004
+2020-06-13 01:00.44 n_tup_upd                : 13000000
+2020-06-13 01:00.44 n_tup_del                : 0
+2020-06-13 01:00.44 n_tup_hot_upd            : 534864
+2020-06-13 01:00.44 n_live_tup               : 2735963
+2020-06-13 01:00.44 n_dead_tup               : 12093593
+2020-06-13 01:00.44 n_mod_since_analyze      : 11500000
+2020-06-13 01:00.44 last_vacuum              : None
+2020-06-13 01:00.44 last_autovacuum          : None
+2020-06-13 01:00.44 last_analyze             : None
+2020-06-13 01:00.44 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:00.44 vacuum_count             : 0
+2020-06-13 01:00.44 autovacuum_count         : 0
+2020-06-13 01:00.44 analyze_count            : 0
+2020-06-13 01:00.44 autoanalyze_count        : 2
+2020-06-13 01:00.44 Function "generate_dummy_data" took 50.204862613000046 seconds to complete.
+2020-06-13 01:00.44 Starting to update data
+2020-06-13 01:01.57 Update 500000 rows for source_id: 4
+2020-06-13 01:02.43 Update 500000 rows for source_id: 5
+2020-06-13 01:03.29 Update 500000 rows for source_id: 1
+2020-06-13 01:04.20 Update 500000 rows for source_id: 2
+2020-06-13 01:05.13 Update 500000 rows for source_id: 3
+2020-06-13 01:05.13 All rows in events table are updated
+2020-06-13 01:05.13 raw_events table size: ('22 GB',)
+2020-06-13 01:05.13 raw_events table stats:
+2020-06-13 01:05.13 relid                    : 16194813
+2020-06-13 01:05.13 schemaname               : public
+2020-06-13 01:05.13 relname                  : raw_events
+2020-06-13 01:05.13 seq_scan                 : 12
+2020-06-13 01:05.13 seq_tup_read             : 22500000
+2020-06-13 01:05.13 idx_scan                 : 12500048
+2020-06-13 01:05.13 idx_tup_fetch            : 33477077
+2020-06-13 01:05.13 n_tup_ins                : 2500004
+2020-06-13 01:05.13 n_tup_upd                : 15500000
+2020-06-13 01:05.13 n_tup_del                : 0
+2020-06-13 01:05.13 n_tup_hot_upd            : 625213
+2020-06-13 01:05.13 n_live_tup               : 2735963
+2020-06-13 01:05.13 n_dead_tup               : 14578417
+2020-06-13 01:05.13 n_mod_since_analyze      : 14000000
+2020-06-13 01:05.13 last_vacuum              : None
+2020-06-13 01:05.13 last_autovacuum          : None
+2020-06-13 01:05.13 last_analyze             : None
+2020-06-13 01:05.13 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:05.13 vacuum_count             : 0
+2020-06-13 01:05.13 autovacuum_count         : 0
+2020-06-13 01:05.13 analyze_count            : 0
+2020-06-13 01:05.13 autoanalyze_count        : 2
+2020-06-13 01:05.13 Function "update_data" took 269.446361142 seconds to complete.
+2020-06-13 01:05.13 Starting soft-deletion
+2020-06-13 01:05.52 0 rows soft deleted for source_id: 4
+2020-06-13 01:05.54 0 rows soft deleted for source_id: 5
+2020-06-13 01:05.56 0 rows soft deleted for source_id: 1
+2020-06-13 01:05.58 0 rows soft deleted for source_id: 2
+2020-06-13 01:06.00 0 rows soft deleted for source_id: 3
+2020-06-13 01:06.00 Total soft deleted rows: 0
+2020-06-13 01:06.00 raw_events table size: ('22 GB',)
+2020-06-13 01:06.00 raw_events table stats:
+2020-06-13 01:06.00 relid                    : 16194813
+2020-06-13 01:06.00 schemaname               : public
+2020-06-13 01:06.00 relname                  : raw_events
+2020-06-13 01:06.00 seq_scan                 : 13
+2020-06-13 01:06.00 seq_tup_read             : 25000000
+2020-06-13 01:06.00 idx_scan                 : 12500053
+2020-06-13 01:06.00 idx_tup_fetch            : 36125299
+2020-06-13 01:06.00 n_tup_ins                : 2500004
+2020-06-13 01:06.00 n_tup_upd                : 15500000
+2020-06-13 01:06.00 n_tup_del                : 0
+2020-06-13 01:06.00 n_tup_hot_upd            : 625213
+2020-06-13 01:06.00 n_live_tup               : 2735963
+2020-06-13 01:06.00 n_dead_tup               : 14578404
+2020-06-13 01:06.00 n_mod_since_analyze      : 14000000
+2020-06-13 01:06.00 last_vacuum              : None
+2020-06-13 01:06.00 last_autovacuum          : None
+2020-06-13 01:06.00 last_analyze             : None
+2020-06-13 01:06.00 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:06.00 vacuum_count             : 0
+2020-06-13 01:06.00 autovacuum_count         : 0
+2020-06-13 01:06.00 analyze_count            : 0
+2020-06-13 01:06.00 autoanalyze_count        : 2
+2020-06-13 01:06.00 Function "soft_delete_rows" took 47.197263975000055 seconds to complete.
+2020-06-13 01:06.00 All done!
+2020-06-13 01:06.00 Sleeping for 120 seconds after RUN No: 2
+2020-06-13 01:08.00 RUN No :::::: 3
+2020-06-13 01:08.01 Table created
+2020-06-13 01:08.01 Starting dummy data insertion
+2020-06-13 01:08.01
+    INSERT INTO public.raw_events (
+        source_id,
+        source_event_id,
+        event_logs
+    )
+    SELECT
+        mod(row_ids.i, 5) + 1,
+        row_ids.i,
+        'Wear general one bar nice spend. Son foreign remember site military. Your choice too need although one political. Time firm water.
+Particularly speech mission remember tree care sign. Myself star gas spend.
+Into good later street. Gun subject PM carry understand consumer by.
+Cover including artist find hope appear should represent. Truth unit impact key page per. Public none sound include air.
+We ask benefit ago again. Pattern president add lead network the.
+Ball appear television so teach energy possible. Student bag grow better. Child might source.
+Heavy church nature.
+Company TV policy drug. Foreign agency when personal huge difficult player forget.
+Difficult there leg theory case north. Class on reach.
+Affect station member although. Of challenge check skin.
+Job trial four easy case member.
+Authority imagine probably whom it job. High trouble drive loss turn attorney education. Those head against particularly listen.
+American focus something who blood. Certain hotel should.
+Under require page claim future in. Truth ten seven both happy central group line. Send cultural whatever computer on fast play.
+Issue radio especially road get car party. All office less politics.
+Nation network college debate direction moment. Ground think save respond friend budget while.
+Tonight garden maybe forward reason. Worker season figure they yeah get. Memory who yet spend raise child above.
+Blood single recently other owner message entire. Collection be along break gun reveal five put. Once effect main simply two no. Sister meet though ago.
+Important produce just raise enough onto try. Those north trouble upon.
+If do them although per environmental medical nearly. Line Congress must city system story.
+Attention attention hotel well news enter director. Father growth behind probably.
+Only cup almost identify. Make real use nice themselves gas best above.
+Stuff find different many water meeting future. Fight institution school white.' as event_logs_str
+    FROM generate_series(1, 2500000) row_ids(i)
+    ON CONFLICT (source_id, source_event_id)
+    DO NOTHING;
+
+2020-06-13 01:08.01 Starting insertion...
+2020-06-13 01:08.42 0 rows generated in events table
+2020-06-13 01:08.42 raw_events table size: ('22 GB',)
+2020-06-13 01:08.42 raw_events table stats:
+2020-06-13 01:08.42 relid                    : 16194813
+2020-06-13 01:08.42 schemaname               : public
+2020-06-13 01:08.42 relname                  : raw_events
+2020-06-13 01:08.42 seq_scan                 : 13
+2020-06-13 01:08.42 seq_tup_read             : 25000000
+2020-06-13 01:08.42 idx_scan                 : 15000053
+2020-06-13 01:08.42 idx_tup_fetch            : 38625299
+2020-06-13 01:08.42 n_tup_ins                : 2500004
+2020-06-13 01:08.42 n_tup_upd                : 15500000
+2020-06-13 01:08.42 n_tup_del                : 0
+2020-06-13 01:08.42 n_tup_hot_upd            : 625213
+2020-06-13 01:08.42 n_live_tup               : 2735963
+2020-06-13 01:08.42 n_dead_tup               : 14578404
+2020-06-13 01:08.42 n_mod_since_analyze      : 14000000
+2020-06-13 01:08.42 last_vacuum              : None
+2020-06-13 01:08.42 last_autovacuum          : None
+2020-06-13 01:08.42 last_analyze             : None
+2020-06-13 01:08.42 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:08.42 vacuum_count             : 0
+2020-06-13 01:08.42 autovacuum_count         : 0
+2020-06-13 01:08.42 analyze_count            : 0
+2020-06-13 01:08.42 autoanalyze_count        : 2
+2020-06-13 01:08.42 Function "generate_dummy_data" took 40.56443988800004 seconds to complete.
+2020-06-13 01:08.42 Starting to update data
+2020-06-13 01:09.56 Update 500000 rows for source_id: 4
+2020-06-13 01:10.36 Update 500000 rows for source_id: 5
+2020-06-13 01:11.16 Update 500000 rows for source_id: 1
+2020-06-13 01:12.03 Update 500000 rows for source_id: 2
+2020-06-13 01:12.55 Update 500000 rows for source_id: 3
+2020-06-13 01:12.55 All rows in events table are updated
+2020-06-13 01:12.55 raw_events table size: ('25 GB',)
+2020-06-13 01:12.56 raw_events table stats:
+2020-06-13 01:12.56 relid                    : 16194813
+2020-06-13 01:12.56 schemaname               : public
+2020-06-13 01:12.56 relname                  : raw_events
+2020-06-13 01:12.56 seq_scan                 : 14
+2020-06-13 01:12.56 seq_tup_read             : 27500000
+2020-06-13 01:12.56 idx_scan                 : 15000058
+2020-06-13 01:12.56 idx_tup_fetch            : 41273323
+2020-06-13 01:12.56 n_tup_ins                : 2500004
+2020-06-13 01:12.56 n_tup_upd                : 18000000
+2020-06-13 01:12.56 n_tup_del                : 0
+2020-06-13 01:12.56 n_tup_hot_upd            : 715328
+2020-06-13 01:12.56 n_live_tup               : 2735963
+2020-06-13 01:12.56 n_dead_tup               : 17064009
+2020-06-13 01:12.56 n_mod_since_analyze      : 16500000
+2020-06-13 01:12.56 last_vacuum              : None
+2020-06-13 01:12.56 last_autovacuum          : None
+2020-06-13 01:12.56 last_analyze             : None
+2020-06-13 01:12.56 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:12.56 vacuum_count             : 0
+2020-06-13 01:12.56 autovacuum_count         : 0
+2020-06-13 01:12.56 analyze_count            : 0
+2020-06-13 01:12.56 autoanalyze_count        : 2
+2020-06-13 01:12.56 Function "update_data" took 253.51364181499991 seconds to complete.
+2020-06-13 01:12.56 Starting soft-deletion
+2020-06-13 01:13.39 0 rows soft deleted for source_id: 4
+2020-06-13 01:13.40 0 rows soft deleted for source_id: 5
+2020-06-13 01:13.42 0 rows soft deleted for source_id: 1
+2020-06-13 01:13.44 0 rows soft deleted for source_id: 2
+2020-06-13 01:13.46 0 rows soft deleted for source_id: 3
+2020-06-13 01:13.46 Total soft deleted rows: 0
+2020-06-13 01:13.46 raw_events table size: ('25 GB',)
+2020-06-13 01:13.46 raw_events table stats:
+2020-06-13 01:13.46 relid                    : 16194813
+2020-06-13 01:13.46 schemaname               : public
+2020-06-13 01:13.46 relname                  : raw_events
+2020-06-13 01:13.46 seq_scan                 : 15
+2020-06-13 01:13.46 seq_tup_read             : 30000000
+2020-06-13 01:13.46 idx_scan                 : 15000063
+2020-06-13 01:13.46 idx_tup_fetch            : 43920778
+2020-06-13 01:13.46 n_tup_ins                : 2500004
+2020-06-13 01:13.46 n_tup_upd                : 18000000
+2020-06-13 01:13.46 n_tup_del                : 0
+2020-06-13 01:13.46 n_tup_hot_upd            : 715328
+2020-06-13 01:13.46 n_live_tup               : 2735963
+2020-06-13 01:13.46 n_dead_tup               : 17063990
+2020-06-13 01:13.46 n_mod_since_analyze      : 16500000
+2020-06-13 01:13.46 last_vacuum              : None
+2020-06-13 01:13.46 last_autovacuum          : None
+2020-06-13 01:13.46 last_analyze             : None
+2020-06-13 01:13.46 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:13.46 vacuum_count             : 0
+2020-06-13 01:13.46 autovacuum_count         : 0
+2020-06-13 01:13.46 analyze_count            : 0
+2020-06-13 01:13.46 autoanalyze_count        : 2
+2020-06-13 01:13.46 Function "soft_delete_rows" took 50.743438513 seconds to complete.
+2020-06-13 01:13.46 All done!
+2020-06-13 01:13.46 Sleeping for 120 seconds after RUN No: 3
+2020-06-13 01:15.46 RUN No :::::: 4
+2020-06-13 01:15.47 Table created
+2020-06-13 01:15.47 Starting dummy data insertion
+2020-06-13 01:15.47
+    INSERT INTO public.raw_events (
+        source_id,
+        source_event_id,
+        event_logs
+    )
+    SELECT
+        mod(row_ids.i, 5) + 1,
+        row_ids.i,
+        'Decision above you carry poor majority herself. At painting room sell daughter pay growth. Seat should dream whose.
+Tell mention check election order everything stuff detail.
+Until direction opportunity very analysis firm once. As year look floor role agency its. Seven those budget involve.
+Evening his gas health sort couple station my.
+Need claim many against television former general. Party individual so attack. Bit avoid yourself campaign alone subject development.
+Student describe concern professional discover cut recognize. Give especially win give yourself system.
+Stock worker everybody professor show bar standard. The site follow be add.
+Republican without mention get. Become me story but order leg food.
+Pick purpose expert age account. Away wish finish within president.
+Situation eat thousand. Cause others skill industry old effect fine.
+Threat remain interest college anything relationship local. Draw final station. Whether address senior moment.
+East example identify likely view around remember. Ground eat determine feeling certainly necessary economy.
+Discussion star individual third.
+Serve can street race seat. Would federal test some score reveal so.
+Include herself hold his. Manage camera beat activity stay bank which.
+Late every include generation how risk. Only scientist teach seven.
+Speak really eat report to product outside.
+Add challenge project happen white. Politics effect against southern very talk part. List key little fast speak tree.
+Herself official receive may push serious successful country. Enter cold cell our series. Sing media step live game item lay.
+Smile create either. Adult others talk without. Stay describe time.
+Trade product participant environment. Again trouble cold. While door statement scene teach. Old site record should.
+Mother good decade TV culture continue condition probably.' as event_logs_str
+    FROM generate_series(1, 2500000) row_ids(i)
+    ON CONFLICT (source_id, source_event_id)
+    DO NOTHING;
+
+2020-06-13 01:15.47 Starting insertion...
+2020-06-13 01:16.25 0 rows generated in events table
+2020-06-13 01:16.25 raw_events table size: ('25 GB',)
+2020-06-13 01:16.25 raw_events table stats:
+2020-06-13 01:16.25 relid                    : 16194813
+2020-06-13 01:16.25 schemaname               : public
+2020-06-13 01:16.25 relname                  : raw_events
+2020-06-13 01:16.25 seq_scan                 : 15
+2020-06-13 01:16.25 seq_tup_read             : 30000000
+2020-06-13 01:16.25 idx_scan                 : 17500063
+2020-06-13 01:16.25 idx_tup_fetch            : 46420778
+2020-06-13 01:16.25 n_tup_ins                : 2500004
+2020-06-13 01:16.25 n_tup_upd                : 18000000
+2020-06-13 01:16.25 n_tup_del                : 0
+2020-06-13 01:16.25 n_tup_hot_upd            : 715328
+2020-06-13 01:16.25 n_live_tup               : 2735963
+2020-06-13 01:16.25 n_dead_tup               : 17063990
+2020-06-13 01:16.25 n_mod_since_analyze      : 16500000
+2020-06-13 01:16.25 last_vacuum              : None
+2020-06-13 01:16.25 last_autovacuum          : None
+2020-06-13 01:16.25 last_analyze             : None
+2020-06-13 01:16.25 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:16.25 vacuum_count             : 0
+2020-06-13 01:16.25 autovacuum_count         : 0
+2020-06-13 01:16.25 analyze_count            : 0
+2020-06-13 01:16.25 autoanalyze_count        : 2
+2020-06-13 01:16.25 Function "generate_dummy_data" took 37.34205237399988 seconds to complete.
+2020-06-13 01:16.25 Starting to update data
+2020-06-13 01:17.50 Update 500000 rows for source_id: 4
+2020-06-13 01:18.31 Update 500000 rows for source_id: 5
+2020-06-13 01:19.14 Update 500000 rows for source_id: 1
+2020-06-13 01:20.02 Update 500000 rows for source_id: 2
+2020-06-13 01:20.53 Update 500000 rows for source_id: 3
+2020-06-13 01:20.53 All rows in events table are updated
+2020-06-13 01:20.53 raw_events table size: ('27 GB',)
+2020-06-13 01:20.53 raw_events table stats:
+2020-06-13 01:20.53 relid                    : 16194813
+2020-06-13 01:20.53 schemaname               : public
+2020-06-13 01:20.53 relname                  : raw_events
+2020-06-13 01:20.53 seq_scan                 : 16
+2020-06-13 01:20.53 seq_tup_read             : 32500000
+2020-06-13 01:20.53 idx_scan                 : 17500068
+2020-06-13 01:20.53 idx_tup_fetch            : 49068045
+2020-06-13 01:20.53 n_tup_ins                : 2500004
+2020-06-13 01:20.53 n_tup_upd                : 20500000
+2020-06-13 01:20.53 n_tup_del                : 0
+2020-06-13 01:20.53 n_tup_hot_upd            : 805247
+2020-06-13 01:20.53 n_live_tup               : 2735963
+2020-06-13 01:20.53 n_dead_tup               : 19549818
+2020-06-13 01:20.53 n_mod_since_analyze      : 19000000
+2020-06-13 01:20.53 last_vacuum              : None
+2020-06-13 01:20.53 last_autovacuum          : None
+2020-06-13 01:20.53 last_analyze             : None
+2020-06-13 01:20.53 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:20.53 vacuum_count             : 0
+2020-06-13 01:20.53 autovacuum_count         : 0
+2020-06-13 01:20.53 analyze_count            : 0
+2020-06-13 01:20.53 autoanalyze_count        : 2
+2020-06-13 01:20.53 Function "update_data" took 268.65225905500006 seconds to complete.
+2020-06-13 01:20.53 Starting soft-deletion
+2020-06-13 01:21.44 0 rows soft deleted for source_id: 4
+2020-06-13 01:21.46 0 rows soft deleted for source_id: 5
+2020-06-13 01:21.48 0 rows soft deleted for source_id: 1
+2020-06-13 01:21.49 0 rows soft deleted for source_id: 2
+2020-06-13 01:21.51 0 rows soft deleted for source_id: 3
+2020-06-13 01:21.51 Total soft deleted rows: 0
+2020-06-13 01:21.51 raw_events table size: ('27 GB',)
+2020-06-13 01:21.51 raw_events table stats:
+2020-06-13 01:21.51 relid                    : 16194813
+2020-06-13 01:21.51 schemaname               : public
+2020-06-13 01:21.51 relname                  : raw_events
+2020-06-13 01:21.51 seq_scan                 : 17
+2020-06-13 01:21.51 seq_tup_read             : 35000000
+2020-06-13 01:21.51 idx_scan                 : 17500073
+2020-06-13 01:21.51 idx_tup_fetch            : 51715104
+2020-06-13 01:21.51 n_tup_ins                : 2500004
+2020-06-13 01:21.51 n_tup_upd                : 20500000
+2020-06-13 01:21.51 n_tup_del                : 0
+2020-06-13 01:21.51 n_tup_hot_upd            : 805247
+2020-06-13 01:21.51 n_live_tup               : 2735963
+2020-06-13 01:21.51 n_dead_tup               : 19549801
+2020-06-13 01:21.51 n_mod_since_analyze      : 19000000
+2020-06-13 01:21.51 last_vacuum              : None
+2020-06-13 01:21.51 last_autovacuum          : None
+2020-06-13 01:21.51 last_analyze             : None
+2020-06-13 01:21.51 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:21.51 vacuum_count             : 0
+2020-06-13 01:21.51 autovacuum_count         : 0
+2020-06-13 01:21.51 analyze_count            : 0
+2020-06-13 01:21.51 autoanalyze_count        : 2
+2020-06-13 01:21.51 Function "soft_delete_rows" took 57.73099901499995 seconds to complete.
+2020-06-13 01:21.51 All done!
+2020-06-13 01:21.51 Sleeping for 120 seconds after RUN No: 4
+2020-06-13 01:23.51 RUN No :::::: 5
+2020-06-13 01:23.52 Table created
+2020-06-13 01:23.52 Starting dummy data insertion
+2020-06-13 01:23.52
+    INSERT INTO public.raw_events (
+        source_id,
+        source_event_id,
+        event_logs
+    )
+    SELECT
+        mod(row_ids.i, 5) + 1,
+        row_ids.i,
+        'Reality outside painting report become. Toward family event dark such firm again. What page clear newspaper ball.
+Read information fire purpose very. Approach trip throughout free civil entire. Just nature increase trouble heart watch bed.
+Before wrong take old former run others believe. Dog among believe value fine staff that.
+Walk two most ten cup far training. Week carry then election small certainly pattern daughter.
+Wind consider that admit Mrs look. Sense scientist bank result.
+Social say about century debate. Push industry certainly Mrs me wear prove. First thing discuss power safe push country. Majority good open executive experience hotel.
+Box operation prepare might catch that. Century energy safe crime social school enter.
+Mention general television save himself call. Notice prevent figure kitchen seven write decision. Hot because movement business pull.
+Cut drive out. Attorney stock defense cup man course.
+Candidate crime officer police it house political. Pull likely piece small go.
+Window key military. Stay century law before everybody.
+Forget result professor research theory become. Step have perform because.
+Tv drive adult executive military plan. Break focus raise away.
+Yes miss interest rise her. Central baby picture.
+Could own glass one then investment scientist. Walk cause trouble movie.
+Federal like be. Positive better management minute air represent.
+Letter employee one reflect. Class personal quickly ok road military. Practice physical actually century over short certain. Summer specific option concern.
+Believe performance officer election information. Remain center without.
+Four PM hospital against fast drop. Or century their defense.
+She inside mind. Represent resource pretty write. Fear knowledge player down positive.
+Happy last hit poor. Place side member.
+Particularly notice military civil account blood his. Cup they enter identify participant. Wear commercial administration fund remain.' as event_logs_str
+    FROM generate_series(1, 2500000) row_ids(i)
+    ON CONFLICT (source_id, source_event_id)
+    DO NOTHING;
+
+2020-06-13 01:23.52 Starting insertion...
+2020-06-13 01:24.27 0 rows generated in events table
+2020-06-13 01:24.27 raw_events table size: ('27 GB',)
+2020-06-13 01:24.27 raw_events table stats:
+2020-06-13 01:24.27 relid                    : 16194813
+2020-06-13 01:24.27 schemaname               : public
+2020-06-13 01:24.27 relname                  : raw_events
+2020-06-13 01:24.27 seq_scan                 : 17
+2020-06-13 01:24.27 seq_tup_read             : 35000000
+2020-06-13 01:24.27 idx_scan                 : 20000073
+2020-06-13 01:24.27 idx_tup_fetch            : 54215104
+2020-06-13 01:24.27 n_tup_ins                : 2500004
+2020-06-13 01:24.27 n_tup_upd                : 20500000
+2020-06-13 01:24.27 n_tup_del                : 0
+2020-06-13 01:24.27 n_tup_hot_upd            : 805247
+2020-06-13 01:24.27 n_live_tup               : 2735963
+2020-06-13 01:24.27 n_dead_tup               : 19549801
+2020-06-13 01:24.27 n_mod_since_analyze      : 19000000
+2020-06-13 01:24.27 last_vacuum              : None
+2020-06-13 01:24.27 last_autovacuum          : None
+2020-06-13 01:24.27 last_analyze             : None
+2020-06-13 01:24.27 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:24.27 vacuum_count             : 0
+2020-06-13 01:24.27 autovacuum_count         : 0
+2020-06-13 01:24.27 analyze_count            : 0
+2020-06-13 01:24.27 autoanalyze_count        : 2
+2020-06-13 01:24.27 Function "generate_dummy_data" took 34.643880828999954 seconds to complete.
+2020-06-13 01:24.27 Starting to update data
+2020-06-13 01:26.00 Update 500000 rows for source_id: 4
+2020-06-13 01:26.43 Update 500000 rows for source_id: 5
+2020-06-13 01:27.27 Update 500000 rows for source_id: 1
+2020-06-13 01:28.16 Update 500000 rows for source_id: 2
+2020-06-13 01:29.15 Update 500000 rows for source_id: 3
+2020-06-13 01:29.15 All rows in events table are updated
+2020-06-13 01:29.15 raw_events table size: ('30 GB',)
+2020-06-13 01:29.15 raw_events table stats:
+2020-06-13 01:29.15 relid                    : 16194813
+2020-06-13 01:29.15 schemaname               : public
+2020-06-13 01:29.15 relname                  : raw_events
+2020-06-13 01:29.15 seq_scan                 : 18
+2020-06-13 01:29.15 seq_tup_read             : 37500000
+2020-06-13 01:29.15 idx_scan                 : 20000078
+2020-06-13 01:29.15 idx_tup_fetch            : 56862155
+2020-06-13 01:29.15 n_tup_ins                : 2500004
+2020-06-13 01:29.15 n_tup_upd                : 23000000
+2020-06-13 01:29.15 n_tup_del                : 0
+2020-06-13 01:29.15 n_tup_hot_upd            : 895176
+2020-06-13 01:29.15 n_live_tup               : 2735963
+2020-06-13 01:29.15 n_dead_tup               : 22049785
+2020-06-13 01:29.15 n_mod_since_analyze      : 21500000
+2020-06-13 01:29.15 last_vacuum              : None
+2020-06-13 01:29.15 last_autovacuum          : None
+2020-06-13 01:29.15 last_analyze             : None
+2020-06-13 01:29.15 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:29.15 vacuum_count             : 0
+2020-06-13 01:29.15 autovacuum_count         : 0
+2020-06-13 01:29.15 analyze_count            : 0
+2020-06-13 01:29.15 autoanalyze_count        : 2
+2020-06-13 01:29.15 Function "update_data" took 288.70710079700007 seconds to complete.
+2020-06-13 01:29.15 Starting soft-deletion
+2020-06-13 01:30.09 0 rows soft deleted for source_id: 4
+2020-06-13 01:30.11 0 rows soft deleted for source_id: 5
+2020-06-13 01:30.12 0 rows soft deleted for source_id: 1
+2020-06-13 01:30.14 0 rows soft deleted for source_id: 2
+2020-06-13 01:30.15 0 rows soft deleted for source_id: 3
+2020-06-13 01:30.15 Total soft deleted rows: 0
+2020-06-13 01:30.15 raw_events table size: ('30 GB',)
+2020-06-13 01:30.15 raw_events table stats:
+2020-06-13 01:30.15 relid                    : 16194813
+2020-06-13 01:30.15 schemaname               : public
+2020-06-13 01:30.15 relname                  : raw_events
+2020-06-13 01:30.15 seq_scan                 : 19
+2020-06-13 01:30.15 seq_tup_read             : 40000000
+2020-06-13 01:30.15 idx_scan                 : 20000083
+2020-06-13 01:30.15 idx_tup_fetch            : 59484199
+2020-06-13 01:30.15 n_tup_ins                : 2500004
+2020-06-13 01:30.15 n_tup_upd                : 23000000
+2020-06-13 01:30.15 n_tup_del                : 0
+2020-06-13 01:30.15 n_tup_hot_upd            : 895176
+2020-06-13 01:30.15 n_live_tup               : 2735963
+2020-06-13 01:30.15 n_dead_tup               : 22031172
+2020-06-13 01:30.15 n_mod_since_analyze      : 21500000
+2020-06-13 01:30.15 last_vacuum              : None
+2020-06-13 01:30.15 last_autovacuum          : None
+2020-06-13 01:30.15 last_analyze             : None
+2020-06-13 01:30.15 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:30.15 vacuum_count             : 0
+2020-06-13 01:30.15 autovacuum_count         : 0
+2020-06-13 01:30.15 analyze_count            : 0
+2020-06-13 01:30.15 autoanalyze_count        : 2
+2020-06-13 01:30.15 Function "soft_delete_rows" took 59.710737937999966 seconds to complete.
+2020-06-13 01:30.15 All done!
+2020-06-13 01:30.15 Sleeping for 120 seconds after RUN No: 5
+2020-06-13 01:32.15 RUN No :::::: 6
+2020-06-13 01:32.16 Table created
+2020-06-13 01:32.16 Starting dummy data insertion
+2020-06-13 01:32.16
+    INSERT INTO public.raw_events (
+        source_id,
+        source_event_id,
+        event_logs
+    )
+    SELECT
+        mod(row_ids.i, 5) + 1,
+        row_ids.i,
+        'Key when also long time blood. List run safe figure.
+One environment set. Art practice stock detail. Plant nature day then interest amount understand.
+Far around almost. Choose order college. One after score career.
+Remember parent produce cut. Various item boy response.
+Road collection big talk role instead candidate. Media along these easy role yes to more. No occur hotel fill not before.
+Sure whom same wall measure again. Central scientist realize. Control stock same project. Whole stage the common prevent.
+World believe soldier certain edge. Play pay real good human. Whatever simple wrong newspaper.
+Discuss almost serious Mr sing city.
+Season environment bag. Possible account question dinner write usually.
+Hard week model box market. Particular available expect really amount accept sometimes.
+Commercial identify on stand trip all. Send through law national last people friend.
+Bring society industry control thank direction. Top his outside project us pass management serious. Child investment yourself still.
+As usually training able treat. Better child computer either.
+Mrs interesting less economy fire education. Heart message matter position water. Instead room seven reveal whole.
+Beat sometimes Republican agent manage special way. Near model new run tonight official. Senior parent decision involve despite close paper pick.
+Suffer team word major western education. Remember rich yeah simple guess member. Spend practice organization fill can cause.
+Create agree likely off anything pick. Career election few turn think tree amount.
+Person body price you. Congress according senior if plan before.
+It manage heavy investment day interest side. Author carry focus fact special.
+Class wish relate sound market. Mr painting role company. Clear various production your both focus.
+Four seven ability probably few. College newspaper little drive. Time to black her become less production.
+Tv character build identify. Example office between table.' as event_logs_str
+    FROM generate_series(1, 2500000) row_ids(i)
+    ON CONFLICT (source_id, source_event_id)
+    DO NOTHING;
+
+2020-06-13 01:32.16 Starting insertion...
+2020-06-13 01:32.54 0 rows generated in events table
+2020-06-13 01:32.54 raw_events table size: ('30 GB',)
+2020-06-13 01:32.54 raw_events table stats:
+2020-06-13 01:32.54 relid                    : 16194813
+2020-06-13 01:32.54 schemaname               : public
+2020-06-13 01:32.54 relname                  : raw_events
+2020-06-13 01:32.54 seq_scan                 : 19
+2020-06-13 01:32.54 seq_tup_read             : 40000000
+2020-06-13 01:32.54 idx_scan                 : 22500083
+2020-06-13 01:32.54 idx_tup_fetch            : 61984199
+2020-06-13 01:32.54 n_tup_ins                : 2500004
+2020-06-13 01:32.54 n_tup_upd                : 23000000
+2020-06-13 01:32.54 n_tup_del                : 0
+2020-06-13 01:32.54 n_tup_hot_upd            : 895176
+2020-06-13 01:32.54 n_live_tup               : 2735963
+2020-06-13 01:32.54 n_dead_tup               : 22031172
+2020-06-13 01:32.54 n_mod_since_analyze      : 21500000
+2020-06-13 01:32.54 last_vacuum              : None
+2020-06-13 01:32.54 last_autovacuum          : None
+2020-06-13 01:32.54 last_analyze             : None
+2020-06-13 01:32.54 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:32.54 vacuum_count             : 0
+2020-06-13 01:32.54 autovacuum_count         : 0
+2020-06-13 01:32.54 analyze_count            : 0
+2020-06-13 01:32.54 autoanalyze_count        : 2
+2020-06-13 01:32.54 Function "generate_dummy_data" took 37.791917624000234 seconds to complete.
+2020-06-13 01:32.54 Starting to update data
+2020-06-13 01:34.23 Update 500000 rows for source_id: 4
+2020-06-13 01:35.01 Update 500000 rows for source_id: 5
+2020-06-13 01:35.39 Update 500000 rows for source_id: 1
+2020-06-13 01:36.21 Update 500000 rows for source_id: 2
+2020-06-13 01:37.06 Update 500000 rows for source_id: 3
+2020-06-13 01:37.06 All rows in events table are updated
+2020-06-13 01:37.06 raw_events table size: ('32 GB',)
+2020-06-13 01:37.06 raw_events table stats:
+2020-06-13 01:37.06 relid                    : 16194813
+2020-06-13 01:37.06 schemaname               : public
+2020-06-13 01:37.06 relname                  : raw_events
+2020-06-13 01:37.06 seq_scan                 : 20
+2020-06-13 01:37.06 seq_tup_read             : 42500000
+2020-06-13 01:37.06 idx_scan                 : 22500088
+2020-06-13 01:37.06 idx_tup_fetch            : 64606220
+2020-06-13 01:37.06 n_tup_ins                : 2500004
+2020-06-13 01:37.06 n_tup_upd                : 25500000
+2020-06-13 01:37.06 n_tup_del                : 0
+2020-06-13 01:37.06 n_tup_hot_upd            : 985060
+2020-06-13 01:37.06 n_live_tup               : 2735963
+2020-06-13 01:37.06 n_dead_tup               : 24531135
+2020-06-13 01:37.06 n_mod_since_analyze      : 24000000
+2020-06-13 01:37.06 last_vacuum              : None
+2020-06-13 01:37.06 last_autovacuum          : None
+2020-06-13 01:37.06 last_analyze             : None
+2020-06-13 01:37.06 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:37.06 vacuum_count             : 0
+2020-06-13 01:37.06 autovacuum_count         : 0
+2020-06-13 01:37.06 analyze_count            : 0
+2020-06-13 01:37.06 autoanalyze_count        : 2
+2020-06-13 01:37.06 Function "update_data" took 251.8329488559998 seconds to complete.
+2020-06-13 01:37.06 Starting soft-deletion
+2020-06-13 01:37.57 0 rows soft deleted for source_id: 4
+2020-06-13 01:37.59 0 rows soft deleted for source_id: 5
+2020-06-13 01:38.00 0 rows soft deleted for source_id: 1
+2020-06-13 01:38.02 0 rows soft deleted for source_id: 2
+2020-06-13 01:38.03 0 rows soft deleted for source_id: 3
+2020-06-13 01:38.03 Total soft deleted rows: 0
+2020-06-13 01:38.03 raw_events table size: ('32 GB',)
+2020-06-13 01:38.03 raw_events table stats:
+2020-06-13 01:38.03 relid                    : 16194813
+2020-06-13 01:38.03 schemaname               : public
+2020-06-13 01:38.03 relname                  : raw_events
+2020-06-13 01:38.03 seq_scan                 : 21
+2020-06-13 01:38.03 seq_tup_read             : 45000000
+2020-06-13 01:38.03 idx_scan                 : 22500093
+2020-06-13 01:38.03 idx_tup_fetch            : 67230910
+2020-06-13 01:38.03 n_tup_ins                : 2500004
+2020-06-13 01:38.03 n_tup_upd                : 25500000
+2020-06-13 01:38.03 n_tup_del                : 0
+2020-06-13 01:38.03 n_tup_hot_upd            : 985060
+2020-06-13 01:38.03 n_live_tup               : 2735963
+2020-06-13 01:38.03 n_dead_tup               : 24512543
+2020-06-13 01:38.03 n_mod_since_analyze      : 24000000
+2020-06-13 01:38.03 last_vacuum              : None
+2020-06-13 01:38.03 last_autovacuum          : None
+2020-06-13 01:38.03 last_analyze             : None
+2020-06-13 01:38.03 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:38.03 vacuum_count             : 0
+2020-06-13 01:38.03 autovacuum_count         : 0
+2020-06-13 01:38.03 analyze_count            : 0
+2020-06-13 01:38.03 autoanalyze_count        : 2
+2020-06-13 01:38.03 Function "soft_delete_rows" took 57.572119032000046 seconds to complete.
+2020-06-13 01:38.03 All done!
+2020-06-13 01:38.03 Sleeping for 120 seconds after RUN No: 6
+2020-06-13 01:40.03 RUN No :::::: 7
+2020-06-13 01:40.04 Table created
+2020-06-13 01:40.04 Starting dummy data insertion
+2020-06-13 01:40.04
+    INSERT INTO public.raw_events (
+        source_id,
+        source_event_id,
+        event_logs
+    )
+    SELECT
+        mod(row_ids.i, 5) + 1,
+        row_ids.i,
+        'Social per civil. Same yourself front season. Social standard even exist.
+Speak lay born. Form parent majority know participant. Increase ago surface weight.
+Inside series tell thank. Politics catch information where car usually growth.
+Spend behavior both long. Agree tax form great education. See we find knowledge treatment development serious. Address star role yard son speech Democrat.
+Family clear risk exactly speak water. Save child speech represent performance cold. Agree weight statement statement unit in.
+Economic attack food laugh newspaper part better. Specific city paper part.
+Degree article available possible order. Manage probably minute offer. Because head nation so this per pretty.
+Oil activity include audience white. Star feel chance although address politics. Across do issue let spend compare.
+Mrs possible add analysis before hotel our. Prepare blue tend house staff. Success ago five information.
+Speech other question indeed message picture study. Full road nothing defense customer.
+Form fight century office indeed area. Something book notice society truth class.
+Improve hit nice kind performance. Try poor modern democratic human difference. Music check close agreement.
+People point month smile. Indicate actually small case middle resource project.
+Technology similar seem operation cover program. Man story around enter blue.
+True discussion without current rate. Movement edge collection which.
+Theory protect movement. Effect remember memory say. Matter instead need conference.
+Rule sometimes serve community tonight. Vote support much ready back.
+Interview us up you social cell. Goal can value leave should five particular machine.
+Improve son less. Attention both hour factor.
+Walk water while woman travel not. Worry include happy thought early president.
+Movement certainly group member. Since use out cost game set.
+Change message paper easy same throughout.
+Mission recently value expert thing bed among. Else represent detail open future rich.' as event_logs_str
+    FROM generate_series(1, 2500000) row_ids(i)
+    ON CONFLICT (source_id, source_event_id)
+    DO NOTHING;
+
+2020-06-13 01:40.04 Starting insertion...
+2020-06-13 01:40.38 0 rows generated in events table
+2020-06-13 01:40.38 raw_events table size: ('32 GB',)
+2020-06-13 01:40.38 raw_events table stats:
+2020-06-13 01:40.38 relid                    : 16194813
+2020-06-13 01:40.38 schemaname               : public
+2020-06-13 01:40.38 relname                  : raw_events
+2020-06-13 01:40.38 seq_scan                 : 21
+2020-06-13 01:40.38 seq_tup_read             : 45000000
+2020-06-13 01:40.38 idx_scan                 : 25000093
+2020-06-13 01:40.38 idx_tup_fetch            : 69730910
+2020-06-13 01:40.38 n_tup_ins                : 2500004
+2020-06-13 01:40.38 n_tup_upd                : 25500000
+2020-06-13 01:40.38 n_tup_del                : 0
+2020-06-13 01:40.38 n_tup_hot_upd            : 985060
+2020-06-13 01:40.38 n_live_tup               : 2735963
+2020-06-13 01:40.38 n_dead_tup               : 24512543
+2020-06-13 01:40.38 n_mod_since_analyze      : 24000000
+2020-06-13 01:40.38 last_vacuum              : None
+2020-06-13 01:40.38 last_autovacuum          : None
+2020-06-13 01:40.38 last_analyze             : None
+2020-06-13 01:40.38 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:40.38 vacuum_count             : 0
+2020-06-13 01:40.38 autovacuum_count         : 0
+2020-06-13 01:40.38 analyze_count            : 0
+2020-06-13 01:40.38 autoanalyze_count        : 2
+2020-06-13 01:40.38 Function "generate_dummy_data" took 33.871543295000265 seconds to complete.
+2020-06-13 01:40.38 Starting to update data
+2020-06-13 01:42.14 Update 500000 rows for source_id: 4
+2020-06-13 01:42.50 Update 500000 rows for source_id: 5
+2020-06-13 01:43.31 Update 500000 rows for source_id: 1
+2020-06-13 01:44.14 Update 500000 rows for source_id: 2
+2020-06-13 01:45.14 Update 500000 rows for source_id: 3
+2020-06-13 01:45.14 All rows in events table are updated
+2020-06-13 01:45.14 raw_events table size: ('35 GB',)
+2020-06-13 01:45.14 raw_events table stats:
+2020-06-13 01:45.14 relid                    : 16194813
+2020-06-13 01:45.14 schemaname               : public
+2020-06-13 01:45.14 relname                  : raw_events
+2020-06-13 01:45.14 seq_scan                 : 22
+2020-06-13 01:45.14 seq_tup_read             : 47500000
+2020-06-13 01:45.14 idx_scan                 : 25000098
+2020-06-13 01:45.14 idx_tup_fetch            : 72355588
+2020-06-13 01:45.14 n_tup_ins                : 2500004
+2020-06-13 01:45.14 n_tup_upd                : 28000000
+2020-06-13 01:45.14 n_tup_del                : 0
+2020-06-13 01:45.14 n_tup_hot_upd            : 1074943
+2020-06-13 01:45.14 n_live_tup               : 2735963
+2020-06-13 01:45.14 n_dead_tup               : 26998607
+2020-06-13 01:45.14 n_mod_since_analyze      : 26500000
+2020-06-13 01:45.14 last_vacuum              : None
+2020-06-13 01:45.14 last_autovacuum          : None
+2020-06-13 01:45.14 last_analyze             : None
+2020-06-13 01:45.14 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:45.14 vacuum_count             : 0
+2020-06-13 01:45.14 autovacuum_count         : 0
+2020-06-13 01:45.14 analyze_count            : 0
+2020-06-13 01:45.14 autoanalyze_count        : 2
+2020-06-13 01:45.14 Function "update_data" took 276.09475886599967 seconds to complete.
+2020-06-13 01:45.14 Starting soft-deletion
+2020-06-13 01:46.23 0 rows soft deleted for source_id: 4
+2020-06-13 01:46.25 0 rows soft deleted for source_id: 5
+2020-06-13 01:46.27 0 rows soft deleted for source_id: 1
+2020-06-13 01:46.28 0 rows soft deleted for source_id: 2
+2020-06-13 01:46.30 0 rows soft deleted for source_id: 3
+2020-06-13 01:46.30 Total soft deleted rows: 0
+2020-06-13 01:46.30 raw_events table size: ('35 GB',)
+2020-06-13 01:46.30 raw_events table stats:
+2020-06-13 01:46.30 relid                    : 16194813
+2020-06-13 01:46.30 schemaname               : public
+2020-06-13 01:46.30 relname                  : raw_events
+2020-06-13 01:46.30 seq_scan                 : 23
+2020-06-13 01:46.30 seq_tup_read             : 50000000
+2020-06-13 01:46.30 idx_scan                 : 25000103
+2020-06-13 01:46.30 idx_tup_fetch            : 74977461
+2020-06-13 01:46.30 n_tup_ins                : 2500004
+2020-06-13 01:46.30 n_tup_upd                : 28000000
+2020-06-13 01:46.30 n_tup_del                : 0
+2020-06-13 01:46.30 n_tup_hot_upd            : 1074943
+2020-06-13 01:46.30 n_live_tup               : 2735963
+2020-06-13 01:46.30 n_dead_tup               : 26998577
+2020-06-13 01:46.30 n_mod_since_analyze      : 26500000
+2020-06-13 01:46.30 last_vacuum              : None
+2020-06-13 01:46.30 last_autovacuum          : None
+2020-06-13 01:46.30 last_analyze             : None
+2020-06-13 01:46.30 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:46.30 vacuum_count             : 0
+2020-06-13 01:46.30 autovacuum_count         : 0
+2020-06-13 01:46.30 analyze_count            : 0
+2020-06-13 01:46.30 autoanalyze_count        : 2
+2020-06-13 01:46.30 Function "soft_delete_rows" took 75.70778535699992 seconds to complete.
+2020-06-13 01:46.30 All done!
+2020-06-13 01:46.30 Sleeping for 120 seconds after RUN No: 7
+2020-06-13 01:48.30 RUN No :::::: 8
+2020-06-13 01:48.31 Table created
+2020-06-13 01:48.31 Starting dummy data insertion
+2020-06-13 01:48.31
+    INSERT INTO public.raw_events (
+        source_id,
+        source_event_id,
+        event_logs
+    )
+    SELECT
+        mod(row_ids.i, 5) + 1,
+        row_ids.i,
+        'Defense compare bill should hundred. Enough case action institution. Expect attention loss full free another mind kind.
+Five modern there resource box during.
+Change resource occur music item land. Although well far summer. Phone director accept teach short water.
+Form nor affect some various watch choice cause. Cost home hard general nor administration open.
+Simple happen beat offer rate half.
+Guess what edge change structure. Outside voice measure under. Old nice per pattern group life.
+House growth fish else. From side hear health. Standard increase deal citizen least organization.
+She half air important truth. Subject you face ready. Able report director pass machine want. Interesting idea if finally cold store business performance.
+Test direction call adult toward small finish. Meet despite nothing agreement receive even.
+Television perhaps where. Travel determine someone hit team. Soon current by write north product well.
+Throughout statement like responsibility career season. Price interest finally central whatever employee. Drop success space water realize market walk also.
+Money real international finally clear. Film clearly decide officer sometimes. Bit your education expert.
+Everything war he including. Require night personal sure whether visit.
+Game interest low. Three onto director interesting wear base.
+Gas right yes American call statement specific. Special might wish street space human.
+Pay cover follow never. American tonight try PM.
+Now population in full billion rise. Event under same commercial.
+Current data whether exactly resource Democrat. Big send guy thing tell young meeting. Often not not produce enter political site.
+Former perform whose better themselves field. Assume hot chance foot candidate case research.
+Live necessary interesting easy perhaps best company.
+Last dark power energy. Course laugh civil degree now go energy.
+Right must body doctor. Radio not account land why thought.' as event_logs_str
+    FROM generate_series(1, 2500000) row_ids(i)
+    ON CONFLICT (source_id, source_event_id)
+    DO NOTHING;
+
+2020-06-13 01:48.31 Starting insertion...
+2020-06-13 01:49.05 0 rows generated in events table
+2020-06-13 01:49.05 raw_events table size: ('35 GB',)
+2020-06-13 01:49.05 raw_events table stats:
+2020-06-13 01:49.05 relid                    : 16194813
+2020-06-13 01:49.05 schemaname               : public
+2020-06-13 01:49.05 relname                  : raw_events
+2020-06-13 01:49.05 seq_scan                 : 23
+2020-06-13 01:49.05 seq_tup_read             : 50000000
+2020-06-13 01:49.05 idx_scan                 : 27500103
+2020-06-13 01:49.05 idx_tup_fetch            : 77477461
+2020-06-13 01:49.05 n_tup_ins                : 2500004
+2020-06-13 01:49.05 n_tup_upd                : 28000000
+2020-06-13 01:49.05 n_tup_del                : 0
+2020-06-13 01:49.05 n_tup_hot_upd            : 1074943
+2020-06-13 01:49.05 n_live_tup               : 2735963
+2020-06-13 01:49.05 n_dead_tup               : 26998577
+2020-06-13 01:49.05 n_mod_since_analyze      : 26500000
+2020-06-13 01:49.05 last_vacuum              : None
+2020-06-13 01:49.05 last_autovacuum          : None
+2020-06-13 01:49.05 last_analyze             : None
+2020-06-13 01:49.05 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:49.05 vacuum_count             : 0
+2020-06-13 01:49.05 autovacuum_count         : 0
+2020-06-13 01:49.05 analyze_count            : 0
+2020-06-13 01:49.05 autoanalyze_count        : 2
+2020-06-13 01:49.05 Function "generate_dummy_data" took 33.85928687200021 seconds to complete.
+2020-06-13 01:49.05 Starting to update data
+2020-06-13 01:50.47 Update 500000 rows for source_id: 4
+2020-06-13 01:51.29 Update 500000 rows for source_id: 5
+2020-06-13 01:52.12 Update 500000 rows for source_id: 1
+2020-06-13 01:52.58 Update 500000 rows for source_id: 2
+2020-06-13 01:53.47 Update 500000 rows for source_id: 3
+2020-06-13 01:53.47 All rows in events table are updated
+2020-06-13 01:53.47 raw_events table size: ('37 GB',)
+2020-06-13 01:53.47 raw_events table stats:
+2020-06-13 01:53.47 relid                    : 16194813
+2020-06-13 01:53.47 schemaname               : public
+2020-06-13 01:53.47 relname                  : raw_events
+2020-06-13 01:53.47 seq_scan                 : 24
+2020-06-13 01:53.47 seq_tup_read             : 52500000
+2020-06-13 01:53.47 idx_scan                 : 27500108
+2020-06-13 01:53.47 idx_tup_fetch            : 80099331
+2020-06-13 01:53.47 n_tup_ins                : 2500004
+2020-06-13 01:53.47 n_tup_upd                : 30500000
+2020-06-13 01:53.47 n_tup_del                : 0
+2020-06-13 01:53.47 n_tup_hot_upd            : 1164822
+2020-06-13 01:53.47 n_live_tup               : 2735963
+2020-06-13 01:53.47 n_dead_tup               : 29484639
+2020-06-13 01:53.47 n_mod_since_analyze      : 29000000
+2020-06-13 01:53.47 last_vacuum              : None
+2020-06-13 01:53.47 last_autovacuum          : None
+2020-06-13 01:53.47 last_analyze             : None
+2020-06-13 01:53.47 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:53.47 vacuum_count             : 0
+2020-06-13 01:53.47 autovacuum_count         : 0
+2020-06-13 01:53.47 analyze_count            : 0
+2020-06-13 01:53.47 autoanalyze_count        : 2
+2020-06-13 01:53.47 Function "update_data" took 282.27184034400034 seconds to complete.
+2020-06-13 01:53.47 Starting soft-deletion
+2020-06-13 01:54.53 0 rows soft deleted for source_id: 4
+2020-06-13 01:54.55 0 rows soft deleted for source_id: 5
+2020-06-13 01:54.57 0 rows soft deleted for source_id: 1
+2020-06-13 01:54.58 0 rows soft deleted for source_id: 2
+2020-06-13 01:55.00 0 rows soft deleted for source_id: 3
+2020-06-13 01:55.00 Total soft deleted rows: 0
+2020-06-13 01:55.00 raw_events table size: ('37 GB',)
+2020-06-13 01:55.00 raw_events table stats:
+2020-06-13 01:55.00 relid                    : 16194813
+2020-06-13 01:55.00 schemaname               : public
+2020-06-13 01:55.00 relname                  : raw_events
+2020-06-13 01:55.00 seq_scan                 : 25
+2020-06-13 01:55.00 seq_tup_read             : 55000000
+2020-06-13 01:55.00 idx_scan                 : 27500113
+2020-06-13 01:55.00 idx_tup_fetch            : 82746165
+2020-06-13 01:55.00 n_tup_ins                : 2500004
+2020-06-13 01:55.00 n_tup_upd                : 30500000
+2020-06-13 01:55.00 n_tup_del                : 0
+2020-06-13 01:55.00 n_tup_hot_upd            : 1164822
+2020-06-13 01:55.00 n_live_tup               : 2735963
+2020-06-13 01:55.00 n_dead_tup               : 29484582
+2020-06-13 01:55.00 n_mod_since_analyze      : 29000000
+2020-06-13 01:55.00 last_vacuum              : None
+2020-06-13 01:55.00 last_autovacuum          : None
+2020-06-13 01:55.00 last_analyze             : None
+2020-06-13 01:55.00 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:55.00 vacuum_count             : 0
+2020-06-13 01:55.00 autovacuum_count         : 0
+2020-06-13 01:55.00 analyze_count            : 0
+2020-06-13 01:55.00 autoanalyze_count        : 2
+2020-06-13 01:55.00 Function "soft_delete_rows" took 72.67637087999992 seconds to complete.
+2020-06-13 01:55.00 All done!
+2020-06-13 01:55.00 Sleeping for 120 seconds after RUN No: 8
+2020-06-13 01:57.00 RUN No :::::: 9
+2020-06-13 01:57.01 Table created
+2020-06-13 01:57.01 Starting dummy data insertion
+2020-06-13 01:57.01
+    INSERT INTO public.raw_events (
+        source_id,
+        source_event_id,
+        event_logs
+    )
+    SELECT
+        mod(row_ids.i, 5) + 1,
+        row_ids.i,
+        'At kid box run. Clearly increase much right. Government medical science mind through as prevent product.
+Step inside so section reveal structure chair. Impact no almost international.
+Base play kitchen try. Country program prove very street know rich medical.
+Music rest until new enter message reason. Himself already person strategy large.
+Into nearly water.
+Happen discover she shoulder. Government choice before Democrat among hotel service.
+Writer mean series nothing nothing sit. Day claim contain discuss bad.
+However picture agree pass report through. Note fear him.
+Become leader difference ok some group. Tax financial scientist sign attention provide itself. Manager major newspaper rock mind. Child above lawyer teacher.
+Well condition not who future people. Quality information citizen without Mrs such job. Ability wide attention fact level never view people. Decision TV industry goal position.
+Ask possible decide career professor experience. Concern above next role. Wear southern lot consider stay throughout itself.
+Answer treatment another institution whose before. Like decide environment adult listen another.
+Wear just writer citizen sport.
+Traditional probably article last forward. Article probably answer argue.
+Should enough act end value new. Have five mission prevent.
+Question theory per deep method federal easy. Government big increase interest.
+Check head huge standard turn spring impact. All evening process of run firm sell.
+Against some foreign. Same wall wife before eight arm seven interest.
+Top opportunity wish race book. Name have TV environment.
+Artist fact year. Evidence today case friend daughter interest. Produce class PM do network expert relationship.
+Personal Democrat or cut. Measure trial whose thus goal test finish. Peace the agency to sell positive blood home.
+Car thousand very well religious. Report reason country debate son. Consumer any space what practice.' as event_logs_str
+    FROM generate_series(1, 2500000) row_ids(i)
+    ON CONFLICT (source_id, source_event_id)
+    DO NOTHING;
+
+2020-06-13 01:57.01 Starting insertion...
+2020-06-13 01:57.35 0 rows generated in events table
+2020-06-13 01:57.35 raw_events table size: ('37 GB',)
+2020-06-13 01:57.35 raw_events table stats:
+2020-06-13 01:57.35 relid                    : 16194813
+2020-06-13 01:57.35 schemaname               : public
+2020-06-13 01:57.35 relname                  : raw_events
+2020-06-13 01:57.35 seq_scan                 : 25
+2020-06-13 01:57.35 seq_tup_read             : 55000000
+2020-06-13 01:57.35 idx_scan                 : 30000113
+2020-06-13 01:57.35 idx_tup_fetch            : 85246165
+2020-06-13 01:57.35 n_tup_ins                : 2500004
+2020-06-13 01:57.35 n_tup_upd                : 30500000
+2020-06-13 01:57.35 n_tup_del                : 0
+2020-06-13 01:57.35 n_tup_hot_upd            : 1164822
+2020-06-13 01:57.35 n_live_tup               : 2735963
+2020-06-13 01:57.35 n_dead_tup               : 29484582
+2020-06-13 01:57.35 n_mod_since_analyze      : 29000000
+2020-06-13 01:57.35 last_vacuum              : None
+2020-06-13 01:57.35 last_autovacuum          : None
+2020-06-13 01:57.35 last_analyze             : None
+2020-06-13 01:57.35 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 01:57.35 vacuum_count             : 0
+2020-06-13 01:57.35 autovacuum_count         : 0
+2020-06-13 01:57.35 analyze_count            : 0
+2020-06-13 01:57.35 autoanalyze_count        : 2
+2020-06-13 01:57.35 Function "generate_dummy_data" took 34.311421744999734 seconds to complete.
+2020-06-13 01:57.35 Starting to update data
+2020-06-13 01:59.39 Update 500000 rows for source_id: 4
+2020-06-13 02:00.37 Update 500000 rows for source_id: 5
+2020-06-13 02:01.42 Update 500000 rows for source_id: 1
+2020-06-13 02:02.32 Update 500000 rows for source_id: 2
+2020-06-13 02:03.26 Update 500000 rows for source_id: 3
+2020-06-13 02:03.26 All rows in events table are updated
+2020-06-13 02:03.26 raw_events table size: ('40 GB',)
+2020-06-13 02:03.26 raw_events table stats:
+2020-06-13 02:03.26 relid                    : 16194813
+2020-06-13 02:03.26 schemaname               : public
+2020-06-13 02:03.26 relname                  : raw_events
+2020-06-13 02:03.26 seq_scan                 : 26
+2020-06-13 02:03.26 seq_tup_read             : 57500000
+2020-06-13 02:03.26 idx_scan                 : 30000118
+2020-06-13 02:03.26 idx_tup_fetch            : 87892991
+2020-06-13 02:03.26 n_tup_ins                : 2500004
+2020-06-13 02:03.26 n_tup_upd                : 33000000
+2020-06-13 02:03.26 n_tup_del                : 0
+2020-06-13 02:03.26 n_tup_hot_upd            : 1254701
+2020-06-13 02:03.26 n_live_tup               : 2735963
+2020-06-13 02:03.26 n_dead_tup               : 31970650
+2020-06-13 02:03.26 n_mod_since_analyze      : 31500000
+2020-06-13 02:03.26 last_vacuum              : None
+2020-06-13 02:03.26 last_autovacuum          : None
+2020-06-13 02:03.26 last_analyze             : None
+2020-06-13 02:03.26 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 02:03.26 vacuum_count             : 0
+2020-06-13 02:03.26 autovacuum_count         : 0
+2020-06-13 02:03.26 analyze_count            : 0
+2020-06-13 02:03.26 autoanalyze_count        : 2
+2020-06-13 02:03.26 Function "update_data" took 350.4492888730001 seconds to complete.
+2020-06-13 02:03.26 Starting soft-deletion
+2020-06-13 02:04.39 0 rows soft deleted for source_id: 4
+2020-06-13 02:04.40 0 rows soft deleted for source_id: 5
+2020-06-13 02:04.42 0 rows soft deleted for source_id: 1
+2020-06-13 02:04.43 0 rows soft deleted for source_id: 2
+2020-06-13 02:04.45 0 rows soft deleted for source_id: 3
+2020-06-13 02:04.45 Total soft deleted rows: 0
+2020-06-13 02:04.45 raw_events table size: ('40 GB',)
+2020-06-13 02:04.45 raw_events table stats:
+2020-06-13 02:04.45 relid                    : 16194813
+2020-06-13 02:04.45 schemaname               : public
+2020-06-13 02:04.45 relname                  : raw_events
+2020-06-13 02:04.45 seq_scan                 : 27
+2020-06-13 02:04.45 seq_tup_read             : 60000000
+2020-06-13 02:04.45 idx_scan                 : 30000123
+2020-06-13 02:04.45 idx_tup_fetch            : 90514976
+2020-06-13 02:04.45 n_tup_ins                : 2500004
+2020-06-13 02:04.45 n_tup_upd                : 33000000
+2020-06-13 02:04.45 n_tup_del                : 0
+2020-06-13 02:04.45 n_tup_hot_upd            : 1254701
+2020-06-13 02:04.45 n_live_tup               : 2735963
+2020-06-13 02:04.45 n_dead_tup               : 31970603
+2020-06-13 02:04.45 n_mod_since_analyze      : 31500000
+2020-06-13 02:04.45 last_vacuum              : None
+2020-06-13 02:04.45 last_autovacuum          : None
+2020-06-13 02:04.45 last_analyze             : None
+2020-06-13 02:04.45 last_autoanalyze         : 2020-06-13 00:29:54.061578+05:00
+2020-06-13 02:04.45 vacuum_count             : 0
+2020-06-13 02:04.45 autovacuum_count         : 0
+2020-06-13 02:04.45 analyze_count            : 0
+2020-06-13 02:04.45 autoanalyze_count        : 2
+2020-06-13 02:04.45 Function "soft_delete_rows" took 79.21747658500044 seconds to complete.
+2020-06-13 02:04.45 All done!
+2020-06-13 02:04.45 Sleeping for 120 seconds after RUN No: 9
+
+Process finished with exit code 0
