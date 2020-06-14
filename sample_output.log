@@ -1,4 +1,4 @@
-... /blogs/postgres-upsert-issue-demo/table_bloat_demo.py
+... /blogs/postgres-upsert-table-bloat-demo/table_bloat_demo.py
 2020-06-13 00:51.54 RUN No :::::: 1
 2020-06-13 00:51.55 Table created
 2020-06-13 00:51.55 Starting dummy data insertion

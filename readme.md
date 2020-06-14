@@ -10,14 +10,23 @@ Make sure you have following setup:
 
 - Postgres 9.6 installed.
 - Update `DATABASE_URL` in `demo_config.cfg`; OR
-    - A user named `blog_demo` with password `Bl0g-D3m0`. 
+    - A user named `blog_demo` with password `blog_demo_pwd`. 
     - A database named `events_dwh`.
 - `Pyenv` and `Pipenv` are installed.
-- At least 20GBs of disk space on hard drive. 
+- Around 20GBs of disk space on hard drive (depends on how many runs you want to try). 
 
 ### Run script
 
-`python table_bloat_demo.py`
+```shell script
+# activate env
+pipenv shell
+
+# install dependencies
+pipenv install
+
+# run script
+python table_bloat_demo.py
+```
 
 By default, script will generate 2.5 million rows but you can configure it from `demo_config.cfg`.
 
