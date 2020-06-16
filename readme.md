@@ -3,6 +3,8 @@
 ## Overview
 Demo code for my blog post titled [When Indexes & Performance Tuning don’t fix Slow queries in Postgres](https://medium.com/@aitzaz/when-indexes-performance-tuning-dont-fix-slow-queries-in-postgres-fb0a63d99276).
 
+Check `sample_output.log` if you don't want to run it locally.
+
 ## Setup & Run Guide
 
 ### Pre-requisites
@@ -48,3 +50,5 @@ Script will generate output logs on console printing table size after each updat
 `VACUUM ANALYSE public.raw_events;`
 
 You can use `VACUUM FULL` as well but beware that it will LOCK the table.
+
+Also check `table_bloat_demo.py`'s `main()` function comments on how adding a small sleep could give Postgres time to update *Analyse* stats (used by query planner).

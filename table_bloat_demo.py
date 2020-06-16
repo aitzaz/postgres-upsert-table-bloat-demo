@@ -163,6 +163,14 @@ def main():
     generate_dummy_data()
 
     update_data()
+
+    # BLOCKED QUERY FIX
+    # Following line with 2 minutes sleep window helped us fix the blocked query issue
+    # by giving Postgres time to analyse table before next round of queries
+
+    # logger.info(f"Sleeping for {_sleep_duration_seconds} seconds AFTER table bloat but BEFORE soft-deletion")
+    # time.sleep(_sleep_duration_seconds)
+
     soft_delete_rows()
     logger.msg("All done!")
 
@@ -171,5 +179,7 @@ if __name__ == '__main__':
     for i in range(1, 6):
         logger.info(f"RUN No :::::: {i}")
         main()
+
+        # To simulate multiple runs
         logger.info(f"Sleeping for {_sleep_duration_seconds} seconds after RUN No: {i}")
         time.sleep(_sleep_duration_seconds)
